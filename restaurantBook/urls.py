@@ -18,7 +18,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from restaurant.views import ReservationViewSet, TableViewSet, MenuItemViewSet, OrderViewSet, MeView
+from restaurant.views import ReservationViewSet, TableViewSet, MenuItemViewSet, OrderViewSet, MeView, ZoneViewSet
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
@@ -29,6 +29,7 @@ router.register(r'reservations', ReservationViewSet)
 router.register(r'tables', TableViewSet, basename='table')
 router.register(r'menu-items', MenuItemViewSet)
 router.register(r'orders', OrderViewSet)
+router.register(r'zones', ZoneViewSet)
 
 urlpatterns = [
     path("admin/", admin.site.urls),

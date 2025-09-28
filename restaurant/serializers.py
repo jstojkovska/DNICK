@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Reservation, Table, Order, MenuItem, OrderItem
+from .models import Reservation, Table, Order, MenuItem, OrderItem, Zone
 
 class TableSerializer(serializers.ModelSerializer):
     class Meta:
@@ -65,3 +65,8 @@ class ReservationSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         validated_data['status'] = 'pending'
         return super().create(validated_data)
+
+class ZoneSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Zone
+        fields = '__all__'

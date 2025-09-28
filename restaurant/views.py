@@ -7,11 +7,11 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from .models import Reservation, Table, MenuItem, OrderItem, Order
+from .models import Reservation, Table, MenuItem, OrderItem, Order, Zone
 from .permissions import IsManager, IsClient, IsManagerOrWaiter, MenuitemPermission
 from .serializers import (
     ReservationSerializer, TableSerializer, MenuItemSerializer,
-    OrderSerializer, OrderCreateSerializer
+    OrderSerializer, OrderCreateSerializer, ZoneSerializer
 )
 def _fresh_order(order_id: int) -> Order: #zoso koristam prefetch i mora da se osvezi//..
     return (
@@ -252,3 +252,8 @@ class OrderViewSet(viewsets.ModelViewSet):
             order.is_paid = True
             order.save()
         return Response({"detail": "The payment has been recorded."}, status=status.HTTP_200_OK)
+
+class ZoneViewSet(viewsets.ModelViewSet):
+    queryset = Zone.objects.all()
+    serializer_class = ZoneSerializer
+

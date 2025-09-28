@@ -97,4 +97,19 @@ class OrderItem(models.Model):
         if self.quantity < 1:
             raise ValidationError("Количината мора да биде барем 1.")
 
+class Zone(models.Model):
+    ZONE_TYPE_CHOICES = (
+        ('glass', 'Glass'),
+        ('terrace', 'Terrace'),
+        ('green', 'Green Area'),
+    )
+
+    type = models.CharField(max_length=20, choices=ZONE_TYPE_CHOICES)
+    top = models.FloatField(default=0)
+    left = models.FloatField(default=0)
+    width = models.FloatField(default=200)
+    height = models.FloatField(default=100)
+
+    def __str__(self):
+        return f'{self.get_type_display()} zone ({self.width}x{self.height})'
 
