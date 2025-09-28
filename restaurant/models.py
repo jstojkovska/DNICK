@@ -3,7 +3,6 @@ from django.db import models
 from django.db.models import ForeignKey, UniqueConstraint, Q
 from django.core.exceptions import ValidationError
 
-# Create your models here.
 
 class User(AbstractUser):
     ROLE_CHOICES = (

@@ -19,12 +19,10 @@ class OrderItemSerializer(serializers.ModelSerializer):
         fields = ['id', 'order', 'menu_item', 'quantity', 'menu_item_detail']
         read_only_fields = ['order']
 
-# input za kreiranje na naracka, spisok na artikli
 class OrderCreateItemInSerializer(serializers.Serializer):
     menu_item = serializers.PrimaryKeyRelatedField(queryset=MenuItem.objects.all())
     quantity = serializers.IntegerField(min_value=1)
 
-# detalen prikaz naracka
 class OrderSerializer(serializers.ModelSerializer):
     orderitem_set = OrderItemSerializer(many=True, read_only=True)
     total = serializers.SerializerMethodField()
@@ -36,7 +34,6 @@ class OrderSerializer(serializers.ModelSerializer):
     def get_total(self, obj):
         return obj.total_price()
 
-# se koristi vo views.py pri POST /api/orders/
 class OrderCreateSerializer(serializers.ModelSerializer):
     items = OrderCreateItemInSerializer(many=True, write_only=True)
 

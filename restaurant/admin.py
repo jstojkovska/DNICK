@@ -43,7 +43,6 @@ class OrderItemInline(admin.TabularInline):
     extra = 1
 
 
-# Other model admins
 class OrderAdmin(admin.ModelAdmin):
     inlines = [OrderItemInline]
     list_display = ('id', 'table', 'is_paid', 'created_at')
